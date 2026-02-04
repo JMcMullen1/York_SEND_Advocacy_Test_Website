@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book an appointment with one of our SEND advocates at York SEND Advocacy." />
   <title>York SEND Advocacy | Book Appointment</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a href="#maincontent" class="skip-link">Skip to main content</a>
+
   <header>
     <div class="container">
       <a href="index.html" class="logo">York SEND Advocacy</a>
@@ -27,40 +29,140 @@
   </header>
 
   <main id="maincontent">
-    <h1>Book an Appointment</h1>
-    <p>Please fill out the form below to request an appointment with one of our advocates. We will get back to you to confirm the date and time.</p>
-    <form action="#" method="post" class="appointment-form">
-      <div>
-        <label for="app-name">Name:</label><br />
-        <input type="text" id="app-name" name="name" required />
+    <!-- Page Banner -->
+    <section class="page-banner">
+      <div class="container">
+        <h1>Book an Appointment</h1>
+        <p>Schedule a free initial consultation with one of our experienced SEND advocates.</p>
       </div>
-      <div>
-        <label for="app-email">Email:</label><br />
-        <input type="email" id="app-email" name="email" required />
+    </section>
+
+    <!-- Booking Section -->
+    <section>
+      <div class="container">
+        <div class="grid-2">
+          <!-- Booking Form -->
+          <div class="fade-in">
+            <form action="#" method="post" class="appointment-form">
+              <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:var(--color-gray-900);margin-bottom:var(--space-xl);">Request an Appointment</h2>
+              <div>
+                <label for="app-name">Full Name</label>
+                <input type="text" id="app-name" name="name" placeholder="Enter your full name" required />
+              </div>
+              <div>
+                <label for="app-email">Email Address</label>
+                <input type="email" id="app-email" name="email" placeholder="Enter your email address" required />
+              </div>
+              <div class="form-row">
+                <div>
+                  <label for="app-date">Preferred Date</label>
+                  <input type="date" id="app-date" name="date" required />
+                </div>
+                <div>
+                  <label for="app-time">Preferred Time</label>
+                  <input type="time" id="app-time" name="time" required />
+                </div>
+              </div>
+              <div>
+                <label for="app-service">Service Required</label>
+                <select id="app-service" name="service">
+                  <option value="">Select a service...</option>
+                  <option value="ehcp">EHCP Guidance</option>
+                  <option value="tribunal">Tribunal Support</option>
+                  <option value="coaching">Parental Coaching</option>
+                  <option value="consultancy">Education Consultancy</option>
+                  <option value="general">General Enquiry</option>
+                </select>
+              </div>
+              <div>
+                <label for="reason">Tell Us About Your Situation</label>
+                <textarea id="reason" name="reason" rows="4" placeholder="Briefly describe your situation and what you are looking for help with..." required></textarea>
+              </div>
+              <div>
+                <button type="submit">Request Appointment</button>
+              </div>
+              <div class="success-message" id="booking-success">
+                Thank you for your booking request. We will contact you within 1-2 working days to confirm your appointment.
+              </div>
+            </form>
+          </div>
+
+          <!-- Booking Info -->
+          <div class="fade-in fade-in-delay-1">
+            <div class="card" style="margin-bottom:var(--space-xl);">
+              <div class="card-icon">&#128197;</div>
+              <h3>What to Expect</h3>
+              <p>Your initial consultation is completely free and lasts approximately 30 minutes. We will discuss your situation, explain how we can help, and outline the next steps.</p>
+            </div>
+            <div class="card" style="margin-bottom:var(--space-xl);">
+              <div class="card-icon">&#128222;</div>
+              <h3>Flexible Options</h3>
+              <p>Appointments can be held in person at our York office, over the phone, or via video call &mdash; whichever suits you best.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">&#128274;</div>
+              <h3>Confidential &amp; Safe</h3>
+              <p>Everything you share with us is treated in the strictest confidence. We are here to support you in a safe, non-judgemental environment.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="app-date">Preferred Date:</label><br />
-        <input type="date" id="app-date" name="date" required />
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+      <div class="container">
+        <h2>Prefer to Talk First?</h2>
+        <p>If you are not ready to book, feel free to call or email us. We are happy to answer your questions.</p>
+        <div class="cta-buttons">
+          <a href="tel:01904123456" class="btn btn-primary">Call 01904 123456</a>
+          <a href="contact.html" class="btn btn-outline">Send a Message</a>
+        </div>
       </div>
-      <div>
-        <label for="app-time">Preferred Time:</label><br />
-        <input type="time" id="app-time" name="time" required />
-      </div>
-      <div>
-        <label for="reason">Reason for Appointment:</label><br />
-        <textarea id="reason" name="reason" rows="3" required></textarea>
-      </div>
-      <div>
-        <button type="submit">Request Appointment</button>
-      </div>
-    </form>
+    </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>&copy; 2026 York SEND Advocacy. All rights reserved.</p>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">York SEND Advocacy</a>
+          <p>Independent advocacy and support for families navigating the SEND system in York and surrounding areas.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">EHCP Guidance</a></li>
+            <li><a href="services.html">Tribunal Support</a></li>
+            <li><a href="services.html">Workshops</a></li>
+            <li><a href="services.html">Consultancy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@yorksendadvocacy.org">info@yorksendadvocacy.org</a></li>
+            <li><a href="tel:01904123456">01904 123456</a></li>
+            <li><a href="contact.html">123 York Road, York</a></li>
+            <li><a href="book.html">Book Appointment</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 York SEND Advocacy. All rights reserved.</p>
+      </div>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
