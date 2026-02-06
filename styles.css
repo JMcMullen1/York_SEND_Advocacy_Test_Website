@@ -329,7 +329,7 @@ nav ul li:last-child a.active::after {
     #ffffff 100%
   );
   text-align: center;
-  padding: var(--space-xl) 0 var(--space-4xl);
+  padding: var(--space-xl) 0 calc(var(--space-4xl) + 0.5rem);
   position: relative;
   overflow: hidden;
 }
@@ -373,7 +373,7 @@ nav ul li:last-child a.active::after {
 
 /* Logo brand container */
 .hero-logo-wrapper {
-  margin-bottom: var(--space-xs);
+  margin-bottom: -0.25rem;
   display: flex;
   justify-content: center;
 }
@@ -428,7 +428,7 @@ nav ul li:last-child a.active::after {
 /* Responsive hero */
 @media (max-width: 768px) {
   .hero {
-    padding: var(--space-lg) 0 var(--space-3xl);
+    padding: var(--space-lg) 0 calc(var(--space-3xl) + 0.5rem);
   }
   .hero-logo {
     max-width: 320px;
