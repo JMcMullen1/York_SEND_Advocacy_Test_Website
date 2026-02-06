@@ -378,7 +378,7 @@ nav ul li:last-child a.active::after {
   justify-content: center;
 }
 .hero-logo {
-  max-width: 380px;
+  max-width: 500px;
   width: 100%;
   height: auto;
   margin: 0 auto;
@@ -431,7 +431,7 @@ nav ul li:last-child a.active::after {
     padding: var(--space-lg) 0 var(--space-3xl);
   }
   .hero-logo {
-    max-width: 320px;
+    max-width: 420px;
   }
   .hero-headline h1 {
     font-size: 1.875rem;
@@ -442,7 +442,7 @@ nav ul li:last-child a.active::after {
 }
 @media (max-width: 480px) {
   .hero-logo {
-    max-width: 280px;
+    max-width: 360px;
   }
   .hero-headline h1 {
     font-size: 1.5rem;
