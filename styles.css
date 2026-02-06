@@ -1,5 +1,13 @@
 /* ===================================================
-   York SEND Advocacy - Modern Design System
+   York SEND Advocacy - Redesigned to Match Brand Logo
+   Color palette derived from the logo:
+   - Navy blue (SEND Advocacy text)
+   - Crimson red (York text)
+   - Gold (cathedral stonework)
+   - Forest green (hills & nature)
+   - Sky blue (wave swoosh)
+   - Orange (child figure)
+   - White (Yorkshire rose)
    =================================================== */
 
 /* Google Fonts Import */
@@ -7,13 +15,29 @@
 
 /* CSS Custom Properties (Design Tokens) */
 :root {
-  /* Color Palette */
+  /* Brand Colors from Logo */
   --color-primary: #1a365d;
   --color-primary-light: #2a4a7f;
   --color-primary-dark: #0f2240;
-  --color-accent: #d4a039;
-  --color-accent-light: #e8b84a;
-  --color-accent-dark: #b8892e;
+  --color-red: #c41e3a;
+  --color-red-light: #d93654;
+  --color-red-dark: #a1182f;
+  --color-green: #2d8a4e;
+  --color-green-light: #38a85e;
+  --color-green-dark: #236b3d;
+  --color-gold: #d4a039;
+  --color-gold-light: #e8b84a;
+  --color-gold-dark: #b8892e;
+  --color-blue: #2b7cb8;
+  --color-blue-light: #3a94d4;
+  --color-blue-dark: #1f6190;
+  --color-orange: #e87722;
+  --color-orange-light: #f08c3d;
+
+  /* Accent (gold from logo) */
+  --color-accent: var(--color-gold);
+  --color-accent-light: var(--color-gold-light);
+  --color-accent-dark: var(--color-gold-dark);
 
   /* Neutrals */
   --color-white: #ffffff;
@@ -142,20 +166,38 @@ header .container {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  min-height: 72px;
+  min-height: 80px;
 }
 
+/* Logo as Image */
 .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+.logo:hover {
+  opacity: 0.85;
+}
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+/* Text-only logo fallback (footer) */
+.logo-text {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.4em;
-  color: var(--color-primary);
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: color var(--transition-fast);
 }
-.logo:hover {
-  color: var(--color-primary-light);
+.logo-text .york {
+  color: var(--color-red);
+}
+.logo-text .send {
+  color: var(--color-primary);
 }
 
 /* Navigation */
@@ -194,8 +236,8 @@ nav ul li a.active::after {
   bottom: 0;
   left: var(--space-md);
   right: var(--space-md);
-  height: 2px;
-  background: var(--color-accent);
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-red), var(--color-blue));
   border-radius: 2px;
 }
 
@@ -296,12 +338,33 @@ nav ul li:last-child a.active::after {
 }
 
 /* ===================================================
+   Wave Decorative Element (inspired by logo swoosh)
+   =================================================== */
+.wave-divider {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wave-top {
+  margin-bottom: -1px;
+}
+.wave-bottom {
+  margin-top: -1px;
+}
+
+/* ===================================================
    Page Banner (Inner Pages)
    =================================================== */
 .page-banner {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 50%, var(--color-primary-dark) 100%);
   color: var(--color-white);
-  padding: var(--space-3xl) 0;
+  padding: var(--space-3xl) 0 var(--space-3xl);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -314,6 +377,17 @@ nav ul li:last-child a.active::after {
   right: 0;
   bottom: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.page-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,35 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E");
+  background-size: cover;
   pointer-events: none;
 }
 .page-banner h1 {
@@ -335,10 +409,10 @@ nav ul li:last-child a.active::after {
    Hero Section (Home Page)
    =================================================== */
 .hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #1e4f8f 50%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 40%, var(--color-primary-dark) 100%);
   color: var(--color-white);
   text-align: center;
-  padding: var(--space-4xl) 0;
+  padding: var(--space-4xl) 0 calc(var(--space-4xl) + 30px);
   position: relative;
   overflow: hidden;
 }
@@ -350,6 +424,17 @@ nav ul li:last-child a.active::after {
   right: 0;
   bottom: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,35 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E");
+  background-size: cover;
   pointer-events: none;
 }
 .hero .container {
@@ -382,7 +467,7 @@ nav ul li:last-child a.active::after {
   margin-right: auto;
 }
 .hero h1 span {
-  color: var(--color-accent-light);
+  color: var(--color-gold-light);
 }
 .hero p {
   font-size: 1.2rem;
@@ -426,15 +511,15 @@ a:focus {
   line-height: 1.5;
 }
 .btn-primary {
-  background: var(--color-accent);
-  color: var(--color-primary-dark);
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+  color: var(--color-white);
 }
 .btn-primary:hover,
 .btn-primary:focus {
-  background: var(--color-accent-light);
-  color: var(--color-primary-dark);
+  background: linear-gradient(135deg, var(--color-red-light) 0%, var(--color-red) 100%);
+  color: var(--color-white);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(212, 160, 57, 0.4);
+  box-shadow: 0 4px 16px rgba(196, 30, 58, 0.35);
 }
 .btn-secondary {
   background: rgba(255, 255, 255, 0.15);
@@ -470,16 +555,27 @@ a:focus {
   box-shadow: var(--shadow-md);
   color: var(--color-primary);
 }
+.btn-green {
+  background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+  color: var(--color-white);
+}
+.btn-green:hover,
+.btn-green:focus {
+  background: linear-gradient(135deg, var(--color-green-light) 0%, var(--color-green) 100%);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(45, 138, 78, 0.35);
+}
 
 /* Legacy .btn support */
-.btn:not(.btn-primary):not(.btn-secondary):not(.btn-outline):not(.btn-white) {
-  background: var(--color-accent);
-  color: var(--color-primary-dark);
+.btn:not(.btn-primary):not(.btn-secondary):not(.btn-outline):not(.btn-white):not(.btn-green) {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+  color: var(--color-white);
 }
-.btn:not(.btn-primary):not(.btn-secondary):not(.btn-outline):not(.btn-white):hover {
-  background: var(--color-accent-light);
+.btn:not(.btn-primary):not(.btn-secondary):not(.btn-outline):not(.btn-white):not(.btn-green):hover {
+  background: linear-gradient(135deg, var(--color-red-light) 0%, var(--color-red) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(212, 160, 57, 0.4);
+  box-shadow: 0 4px 16px rgba(196, 30, 58, 0.35);
 }
 
 /* ===================================================
@@ -512,8 +608,12 @@ section {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-accent-dark);
+  color: var(--color-green);
   margin-bottom: var(--space-sm);
+  position: relative;
+  padding: 0.25em 0.75em;
+  background: rgba(45, 138, 78, 0.08);
+  border-radius: 50px;
 }
 
 .bg-light {
@@ -549,7 +649,7 @@ section {
   justify-content: center;
   font-size: 1.5rem;
   margin-bottom: var(--space-lg);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
   color: var(--color-white);
 }
 
@@ -570,13 +670,13 @@ section {
   align-items: center;
   gap: var(--space-sm);
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-red);
   text-decoration: none;
   transition: gap var(--transition-fast), color var(--transition-fast);
 }
 .card-link:hover {
   gap: var(--space-md);
-  color: var(--color-primary-light);
+  color: var(--color-red-light);
 }
 .card-link .arrow {
   transition: transform var(--transition-fast);
@@ -620,13 +720,25 @@ section {
   padding: var(--space-4xl) 0;
 }
 
+/* Alternate card icon colors for variety */
+.features-section .grid-3 > :nth-child(1) .card-icon {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+}
+.features-section .grid-3 > :nth-child(2) .card-icon {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
+}
+.features-section .grid-3 > :nth-child(3) .card-icon {
+  background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+}
+
 /* ===================================================
    Stats Section
    =================================================== */
 .stats-section {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-green-dark) 0%, var(--color-green) 50%, var(--color-blue-dark) 100%);
   padding: var(--space-3xl) 0;
   color: var(--color-white);
+  position: relative;
 }
 .stats-grid {
   display: grid;
@@ -641,13 +753,13 @@ section {
   font-family: var(--font-heading);
   font-size: 2.75rem;
   font-weight: 800;
-  color: var(--color-accent-light);
+  color: var(--color-gold-light);
   line-height: 1.2;
   margin-bottom: var(--space-xs);
 }
 .stat-label {
   font-size: 0.938rem;
-  opacity: 0.85;
+  opacity: 0.9;
   font-weight: 500;
 }
 
@@ -666,29 +778,66 @@ section {
    CTA Banner
    =================================================== */
 .cta-banner {
-  background: var(--color-gray-50);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 100%);
   padding: var(--space-4xl) 0;
   text-align: center;
+  color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,30 C360,0 720,60 1080,30 C1260,15 1380,25 1440,30 L1440,0 L0,0 Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  pointer-events: none;
 }
 .cta-banner h2 {
   font-family: var(--font-heading);
   font-size: 2rem;
-  color: var(--color-gray-900);
+  color: var(--color-white);
   margin-bottom: var(--space-md);
+  position: relative;
 }
 .cta-banner p {
   font-size: 1.125rem;
-  color: var(--color-gray-500);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: var(--space-xl);
   max-width: 550px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 .cta-buttons {
   display: flex;
   justify-content: center;
   gap: var(--space-md);
   flex-wrap: wrap;
+  position: relative;
+}
+.cta-banner .btn-primary {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-primary-dark);
+}
+.cta-banner .btn-primary:hover,
+.cta-banner .btn-primary:focus {
+  background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
+  color: var(--color-primary-dark);
+  box-shadow: 0 4px 16px rgba(212, 160, 57, 0.4);
+}
+.cta-banner .btn-outline {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.cta-banner .btn-outline:hover,
+.cta-banner .btn-outline:focus {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 /* ===================================================
@@ -715,11 +864,12 @@ section {
   line-height: 1.8;
 }
 .story-highlight {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 100%);
   color: var(--color-white);
   padding: var(--space-2xl);
   border-radius: var(--radius-lg);
   position: relative;
+  border-left: 5px solid var(--color-gold);
 }
 .story-highlight blockquote {
   background: none;
@@ -730,11 +880,12 @@ section {
   line-height: 1.7;
   font-style: italic;
   color: var(--color-white);
+  box-shadow: none;
 }
 .story-highlight blockquote footer {
   text-align: left;
   margin-top: var(--space-lg);
-  color: var(--color-accent-light);
+  color: var(--color-gold-light);
   font-style: normal;
   font-weight: 600;
   background: none;
@@ -767,6 +918,17 @@ section {
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-gray-200);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.team-member::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-red), var(--color-blue), var(--color-green));
 }
 .team-member:hover {
   transform: translateY(-4px);
@@ -789,7 +951,7 @@ section {
 }
 .team-member .role {
   display: block;
-  color: var(--color-accent-dark);
+  color: var(--color-red);
   font-weight: 600;
   font-size: 0.875rem;
   margin-bottom: var(--space-md);
@@ -839,12 +1001,28 @@ section {
   flex-shrink: 0;
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
+}
+/* Alternate value icon colors */
+.values-grid > :nth-child(1) .value-icon {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-light) 100%);
+  color: var(--color-white);
+}
+.values-grid > :nth-child(2) .value-icon {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+  color: var(--color-primary-dark);
+}
+.values-grid > :nth-child(3) .value-icon {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+  color: var(--color-white);
+}
+.values-grid > :nth-child(4) .value-icon {
+  background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-light) 100%);
+  color: var(--color-white);
 }
 .value-card h3 {
   font-family: var(--font-heading);
@@ -899,7 +1077,19 @@ section {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+/* Alternate service card top bar colors */
+.services-grid > :nth-child(1)::before {
+  background: linear-gradient(90deg, var(--color-red), var(--color-gold));
+}
+.services-grid > :nth-child(2)::before {
+  background: linear-gradient(90deg, var(--color-blue), var(--color-primary));
+}
+.services-grid > :nth-child(3)::before {
+  background: linear-gradient(90deg, var(--color-green), var(--color-blue));
+}
+.services-grid > :nth-child(4)::before {
+  background: linear-gradient(90deg, var(--color-gold), var(--color-orange));
 }
 .service-card:hover {
   transform: translateY(-4px);
@@ -909,13 +1099,25 @@ section {
   width: 60px;
   height: 60px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   margin-bottom: var(--space-lg);
+}
+/* Alternate service icon colors */
+.services-grid > :nth-child(1) .service-icon {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+}
+.services-grid > :nth-child(2) .service-icon {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
+}
+.services-grid > :nth-child(3) .service-icon {
+  background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+}
+.services-grid > :nth-child(4) .service-icon {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
 }
 .service-card h3 {
   font-family: var(--font-heading);
@@ -933,6 +1135,19 @@ section {
   .services-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ===================================================
+   Process Steps
+   =================================================== */
+.bg-light .grid-3 > :nth-child(1) .card-icon {
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+}
+.bg-light .grid-3 > :nth-child(2) .card-icon {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+}
+.bg-light .grid-3 > :nth-child(3) .card-icon {
+  background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-dark) 100%);
 }
 
 /* ===================================================
@@ -957,7 +1172,7 @@ section {
   box-shadow: var(--shadow-lg);
 }
 .testimonial-card .stars {
-  color: var(--color-accent);
+  color: var(--color-gold);
   font-size: 1.125rem;
   margin-bottom: var(--space-md);
   letter-spacing: 0.1em;
@@ -965,7 +1180,8 @@ section {
 .testimonial-card .quote-mark {
   font-family: var(--font-heading);
   font-size: 4rem;
-  color: var(--color-gray-200);
+  color: var(--color-blue);
+  opacity: 0.2;
   line-height: 1;
   position: absolute;
   top: var(--space-lg);
@@ -986,7 +1202,7 @@ section {
 .testimonial-author .avatar {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -1010,7 +1226,7 @@ section {
 /* Legacy blockquote support */
 blockquote {
   background: var(--color-white);
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--color-gold);
   border-radius: var(--radius-md);
   margin: var(--space-lg) 0;
   padding: var(--space-xl);
@@ -1062,10 +1278,13 @@ blockquote footer {
   display: inline-block;
   font-size: 0.813rem;
   font-weight: 600;
-  color: var(--color-accent-dark);
+  color: var(--color-green);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-sm);
+  padding: 0.2em 0.6em;
+  background: rgba(45, 138, 78, 0.08);
+  border-radius: 50px;
 }
 .article-card h3 {
   font-family: var(--font-heading);
@@ -1102,13 +1321,13 @@ blockquote footer {
 .download-icon {
   width: 48px;
   height: 48px;
-  background: var(--color-gray-100);
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-white);
   flex-shrink: 0;
 }
 .download-info h4 {
@@ -1187,7 +1406,7 @@ blockquote footer {
 .info-card-icon {
   width: 44px;
   height: 44px;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
   color: var(--color-white);
   border-radius: var(--radius-sm);
   display: flex;
@@ -1260,8 +1479,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.12);
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(43, 124, 184, 0.12);
 }
 input::placeholder,
 textarea::placeholder {
@@ -1272,7 +1491,7 @@ textarea {
   min-height: 120px;
 }
 button[type=submit] {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
   color: var(--color-white);
   padding: 0.75rem var(--space-xl);
   border: none;
@@ -1284,12 +1503,12 @@ button[type=submit] {
   width: 100%;
 }
 button[type=submit]:hover {
-  background: var(--color-primary-light);
+  background: linear-gradient(135deg, var(--color-red-light) 0%, var(--color-red) 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+  box-shadow: 0 4px 16px rgba(196, 30, 58, 0.3);
 }
 button[type=submit]:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-red);
   outline-offset: 2px;
 }
 
@@ -1321,6 +1540,17 @@ body > footer {
   background: var(--color-gray-900);
   color: var(--color-gray-400);
   padding: var(--space-3xl) 0 var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-green), var(--color-blue));
 }
 .footer-content {
   display: grid;
@@ -1331,10 +1561,14 @@ body > footer {
   margin-bottom: var(--space-xl);
 }
 .footer-brand .logo {
-  color: var(--color-white);
-  font-size: 1.3em;
   display: inline-block;
   margin-bottom: var(--space-md);
+}
+.footer-brand .logo img {
+  height: 50px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
 }
 .footer-brand p {
   color: var(--color-gray-400);
@@ -1365,7 +1599,7 @@ body > footer {
   transition: color var(--transition-fast);
 }
 .footer-column ul li a:hover {
-  color: var(--color-accent-light);
+  color: var(--color-gold-light);
 }
 .footer-bottom {
   text-align: center;
