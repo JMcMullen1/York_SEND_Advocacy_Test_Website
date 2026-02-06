@@ -373,7 +373,7 @@ nav ul li:last-child a.active::after {
 
 /* Logo brand container */
 .hero-logo-wrapper {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   display: flex;
   justify-content: center;
 }
