@@ -324,9 +324,9 @@ nav ul li:last-child a.active::after {
 .hero {
   background: linear-gradient(
     180deg,
-    var(--color-warm-50) 0%,
-    var(--color-cream) 40%,
-    var(--color-white) 100%
+    #f8f9fa 0%,
+    #ffffff 40%,
+    #ffffff 100%
   );
   text-align: center;
   padding: var(--space-4xl) 0 var(--space-4xl);
@@ -352,7 +352,7 @@ nav ul li:last-child a.active::after {
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 160, 57, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 142, 196, 0.04) 0%, transparent 70%);
 }
 .hero-bg-shapes::after {
   content: '';
@@ -362,7 +362,7 @@ nav ul li:last-child a.active::after {
   width: 450px;
   height: 450px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(58, 140, 80, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(26, 54, 93, 0.03) 0%, transparent 70%);
 }
 
 .hero .container {
@@ -378,7 +378,7 @@ nav ul li:last-child a.active::after {
   justify-content: center;
 }
 .hero-logo {
-  max-width: 580px;
+  max-width: 380px;
   width: 100%;
   height: auto;
   margin: 0 auto;
@@ -436,7 +436,7 @@ nav ul li:last-child a.active::after {
     padding: var(--space-2xl) 0 var(--space-3xl);
   }
   .hero-logo {
-    max-width: 440px;
+    max-width: 320px;
     padding: var(--space-sm) var(--space-md);
   }
   .hero-headline h1 {
@@ -448,7 +448,7 @@ nav ul li:last-child a.active::after {
 }
 @media (max-width: 480px) {
   .hero-logo {
-    max-width: 340px;
+    max-width: 280px;
     padding: var(--space-xs) var(--space-sm);
   }
   .hero-headline h1 {
