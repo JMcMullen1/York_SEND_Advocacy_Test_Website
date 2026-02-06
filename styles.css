@@ -322,7 +322,7 @@ nav ul li:last-child a.active::after {
    Hero Section (Completely Redesigned)
    =================================================== */
 .hero {
-  background: linear-gradient(160deg, var(--color-cream) 0%, #eef5ec 25%, #f0f4e8 50%, #e8eef5 75%, var(--color-cream) 100%);
+  background: var(--color-white);
   text-align: center;
   padding: var(--space-3xl) 0 var(--space-4xl);
   position: relative;
