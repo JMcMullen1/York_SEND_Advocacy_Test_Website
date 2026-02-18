@@ -49,7 +49,11 @@
         <div class="grid-2">
           <!-- Booking Form -->
           <div class="fade-in">
-            <form action="#" method="post" class="appointment-form">
+            <form action="https://formsubmit.co/enquiries@yorksendadvocacy.co.uk" method="POST" class="appointment-form" data-formsubmit>
+              <input type="hidden" name="_subject" value="New Appointment Request - York SEND Advocacy" />
+              <input type="hidden" name="_captcha" value="true" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="text" name="_honey" style="display:none" />
               <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:var(--color-gray-900);margin-bottom:var(--space-xl);">Request an Appointment</h2>
               <div>
                 <label for="app-name">Full Name</label>
@@ -89,6 +93,9 @@
               </div>
               <div class="success-message" id="booking-success">
                 Thank you for your booking request. We will contact you within 1-2 working days to confirm your appointment.
+              </div>
+              <div class="error-message" id="booking-error">
+                Sorry, there was a problem submitting your request. Please try again or email us directly.
               </div>
             </form>
           </div>
@@ -156,7 +163,7 @@
         <div class="footer-column">
           <h4>Contact</h4>
           <ul>
-            <li><a href="mailto:info@yorksendadvocacy.org">info@yorksendadvocacy.org</a></li>
+            <li><a href="mailto:enquiries@yorksendadvocacy.co.uk">enquiries@yorksendadvocacy.co.uk</a></li>
             <li><a href="tel:01904123456">01904 123456</a></li>
             <li><a href="contact.html">123 York Road, York</a></li>
             <li><a href="book.html">Book Appointment</a></li>
