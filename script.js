@@ -68,29 +68,70 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ===================================================
-  // Form Submission Handler
+  // Form Submission Handler (Formsubmit.co AJAX)
   // ===================================================
-  var forms = document.querySelectorAll('form');
+  var forms = document.querySelectorAll('form[data-formsubmit]');
   forms.forEach(function (form) {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      // Find success message within or after the form
+      var submitBtn = form.querySelector('button[type="submit"]');
       var successMsg = form.querySelector('.success-message');
-      if (successMsg) {
-        successMsg.classList.add('show');
-        // Hide after 5 seconds
-        setTimeout(function () {
-          successMsg.classList.remove('show');
-        }, 5000);
+      var errorMsg = form.querySelector('.error-message');
+      var originalBtnText = submitBtn ? submitBtn.textContent : '';
+
+      // Hide any previous messages
+      if (successMsg) successMsg.classList.remove('show');
+      if (errorMsg) errorMsg.classList.remove('show');
+
+      // Disable button and show sending state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
       }
 
-      form.reset();
+      var formData = new FormData(form);
 
-      // Scroll to success message
-      if (successMsg) {
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(function (response) {
+        if (response.ok) {
+          // Show success message
+          if (successMsg) {
+            successMsg.classList.add('show');
+            setTimeout(function () {
+              successMsg.classList.remove('show');
+            }, 8000);
+          }
+          form.reset();
+          if (successMsg) {
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(function () {
+        // Show error message
+        if (errorMsg) {
+          errorMsg.classList.add('show');
+          setTimeout(function () {
+            errorMsg.classList.remove('show');
+          }, 8000);
+        }
+      })
+      .finally(function () {
+        // Re-enable button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      });
     });
   });
 
