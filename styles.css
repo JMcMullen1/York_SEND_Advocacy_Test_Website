@@ -2065,6 +2065,529 @@ footer::before {
 }
 
 /* ===================================================
+   Pricing Page
+   =================================================== */
+
+/* Reassurance bar */
+.pricing-reassurance {
+  padding: var(--space-2xl) 0;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-warm-200);
+}
+.pricing-reassurance p {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--color-warm-600);
+  line-height: 1.75;
+}
+
+/* Jump navigation */
+.pricing-jump-nav {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-warm-200);
+  position: sticky;
+  top: 100px;
+  z-index: 90;
+}
+.pricing-jump-nav-inner {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: var(--space-md) 0;
+}
+.pricing-jump-nav-inner::-webkit-scrollbar {
+  display: none;
+}
+.pricing-jump-link {
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-warm-600);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 50px;
+  border: 1px solid var(--color-warm-200);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.pricing-jump-link:hover {
+  color: var(--color-navy);
+  border-color: var(--color-navy);
+  background: var(--color-warm-50);
+}
+
+/* Package dropdowns */
+.pricing-packages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.pricing-package {
+  background: var(--color-white);
+  border: 1px solid var(--color-warm-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  cursor: pointer;
+}
+.pricing-package:hover {
+  border-color: var(--color-navy);
+  box-shadow: var(--shadow-md);
+}
+.pricing-package.open {
+  border-color: var(--color-navy);
+  box-shadow: var(--shadow-md);
+}
+.pricing-package-header {
+  padding: var(--space-xl) var(--space-2xl);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+.pricing-package-header:hover {
+  background: var(--color-warm-50);
+}
+.pricing-package-info {
+  flex: 1;
+}
+.pricing-package-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-green);
+  margin-bottom: var(--space-sm);
+}
+.pricing-package-label--popular {
+  color: var(--color-crimson);
+}
+.pricing-package-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-warm-900);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+.pricing-package-desc {
+  font-size: 0.938rem;
+  color: var(--color-warm-600);
+  line-height: 1.6;
+  max-width: 700px;
+}
+.pricing-package-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-navy);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  white-space: nowrap;
+}
+.pricing-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-navy);
+  font-size: 1.1rem;
+  transition: transform var(--transition-base), background var(--transition-fast), color var(--transition-fast);
+}
+.pricing-package.open .pricing-toggle-icon {
+  transform: rotate(180deg);
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+.pricing-toggle-text-closed,
+.pricing-package.open .pricing-toggle-text-open {
+  display: inline;
+}
+.pricing-toggle-text-open,
+.pricing-package.open .pricing-toggle-text-closed {
+  display: none;
+}
+
+/* Package body (expandable) */
+.pricing-package-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+.pricing-package.open .pricing-package-body {
+  max-height: 800px;
+}
+.pricing-package-body-inner {
+  padding: 0 var(--space-2xl) var(--space-2xl);
+  border-top: 1px solid var(--color-warm-200);
+}
+.pricing-outcome-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-green);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+.pricing-includes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pricing-includes li {
+  font-size: 0.938rem;
+  color: var(--color-warm-700);
+  padding: var(--space-sm) 0;
+  padding-left: var(--space-xl);
+  position: relative;
+  border-bottom: 1px solid var(--color-warm-100);
+}
+.pricing-includes li:last-child {
+  border-bottom: none;
+}
+.pricing-includes li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--color-green);
+  font-weight: 700;
+}
+
+/* Price bar inside packages */
+.pricing-price-bar {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--color-warm-50);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.pricing-price {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-navy-dark);
+  line-height: 1;
+}
+.pricing-price span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-warm-500);
+}
+
+/* Tribunal pricing table */
+.pricing-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-warm-200);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+}
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.938rem;
+}
+.pricing-table thead {
+  background: var(--color-warm-50);
+}
+.pricing-table th {
+  text-align: left;
+  padding: var(--space-md) var(--space-lg);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-warm-600);
+  border-bottom: 1px solid var(--color-warm-200);
+  white-space: nowrap;
+}
+.pricing-table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-warm-100);
+  vertical-align: top;
+}
+.pricing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.pricing-table tbody tr:hover {
+  background: var(--color-warm-50);
+}
+.pricing-table-type {
+  font-weight: 500;
+  color: var(--color-warm-900);
+}
+.pricing-table-hours {
+  color: var(--color-warm-500);
+  font-size: 0.875rem;
+}
+.pricing-table-fee {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-navy-dark);
+  white-space: nowrap;
+  font-size: 1rem;
+}
+.pricing-table-note {
+  font-size: 0.875rem;
+  color: var(--color-warm-600);
+  max-width: 300px;
+}
+.pricing-table-footnote {
+  font-size: 0.875rem;
+  color: var(--color-warm-500);
+  margin-top: var(--space-md);
+  line-height: 1.6;
+}
+
+/* Callout boxes */
+.pricing-callout {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-xl);
+  background: rgba(212, 160, 57, 0.08);
+  border: 1px solid rgba(212, 160, 57, 0.2);
+}
+.pricing-callout--info {
+  background: rgba(59, 142, 196, 0.06);
+  border-color: rgba(59, 142, 196, 0.15);
+}
+.pricing-callout-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.pricing-callout-content h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-warm-900);
+}
+.pricing-callout-content p {
+  font-size: 0.938rem;
+  color: var(--color-warm-600);
+  line-height: 1.6;
+}
+.pricing-callout-prices {
+  display: flex;
+  gap: var(--space-xl);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+.pricing-callout-price-item {
+  display: flex;
+  flex-direction: column;
+}
+.pricing-callout-price-value {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-warm-900);
+}
+.pricing-callout-price-label {
+  font-size: 0.8rem;
+  color: var(--color-warm-500);
+}
+.pricing-callout-note {
+  margin-top: var(--space-md);
+}
+
+/* Rate cards */
+.pricing-rate-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+.pricing-rate-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-warm-200);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.pricing-rate-card:hover {
+  border-color: var(--color-navy);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.pricing-rate-card-top {
+  padding: var(--space-2xl);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.pricing-rate-card-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-green);
+  margin-bottom: var(--space-sm);
+}
+.pricing-rate-card-desc {
+  font-size: 0.938rem;
+  color: var(--color-warm-600);
+  margin-top: var(--space-xs);
+  line-height: 1.55;
+}
+.pricing-rate-card-uses {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-warm-100);
+  list-style: none;
+  flex-grow: 1;
+  padding-left: 0;
+}
+.pricing-rate-card-uses li {
+  font-size: 0.875rem;
+  color: var(--color-warm-600);
+  padding: var(--space-xs) 0;
+  padding-left: var(--space-xl);
+  position: relative;
+}
+.pricing-rate-card-uses li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--color-green);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.pricing-rate-card-footer {
+  padding: var(--space-lg) var(--space-2xl);
+  background: var(--color-warm-50);
+  border-top: 1px solid var(--color-warm-100);
+}
+.pricing-rate-card-price {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-navy-dark);
+  line-height: 1;
+}
+.pricing-rate-card-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-warm-500);
+}
+
+/* FAQ */
+.pricing-faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.pricing-faq-item {
+  border-bottom: 1px solid var(--color-warm-200);
+}
+.pricing-faq-item:last-child {
+  border-bottom: none;
+}
+.pricing-faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: var(--space-lg) var(--space-2xl) var(--space-lg) 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-warm-900);
+  cursor: pointer;
+  position: relative;
+  line-height: 1.4;
+  transition: color var(--transition-fast);
+}
+.pricing-faq-q:hover {
+  color: var(--color-navy);
+}
+.pricing-faq-q::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-crimson);
+}
+.pricing-faq-item.open .pricing-faq-q::after {
+  content: '\2212';
+}
+.pricing-faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+.pricing-faq-item.open .pricing-faq-a {
+  max-height: 300px;
+}
+.pricing-faq-a-inner {
+  padding: 0 0 var(--space-lg) 0;
+  font-size: 0.938rem;
+  color: var(--color-warm-600);
+  line-height: 1.7;
+}
+
+/* Pricing responsive */
+@media (max-width: 900px) {
+  .pricing-rate-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pricing-jump-nav {
+    top: 100px;
+  }
+}
+@media (max-width: 600px) {
+  .pricing-rate-cards {
+    grid-template-columns: 1fr;
+  }
+  .pricing-package-header {
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+  }
+  .pricing-package-body-inner {
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
+  .pricing-price-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+  .pricing-callout {
+    flex-direction: column;
+  }
+  .pricing-callout-prices {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .pricing-table th,
+  .pricing-table td {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .pricing-reassurance {
+    padding: var(--space-xl) 0;
+  }
+}
+
+/* ===================================================
    Print Styles
    =================================================== */
 @media print {
