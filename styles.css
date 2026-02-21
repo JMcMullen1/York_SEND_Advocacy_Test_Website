@@ -535,6 +535,22 @@ nav ul li:last-child a.active::after {
   margin: 0 auto;
   position: relative;
 }
+.page-banner .banner-cta-text {
+  margin-top: var(--space-md);
+  font-size: 1.05rem;
+  opacity: 1;
+}
+.page-banner .banner-cta-link {
+  color: var(--color-gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+.page-banner .banner-cta-link:hover {
+  color: var(--color-white);
+  opacity: 1;
+}
 
 /* ===================================================
    Buttons
