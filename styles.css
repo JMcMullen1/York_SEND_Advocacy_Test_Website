@@ -1504,16 +1504,6 @@ blockquote footer {
   font-weight: 500;
 }
 
-.map {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  margin-top: var(--space-md);
-}
-.map iframe {
-  display: block;
-  border: 0;
-}
 
 @media (max-width: 768px) {
   .contact-container {
