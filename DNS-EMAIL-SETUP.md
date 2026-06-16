@@ -29,15 +29,17 @@ DKIM signs outbound mail and builds sender reputation. Two steps:
 
 ### a) Add the CNAME records at IONOS
 
-> Tenant initial domain confirmed: **`yorksendadovcacy.onmicrosoft.com`**
-> (note Microsoft's spelling "ad**ov**cacy" — it must be copied exactly).
+> Targets confirmed from the M365 Defender DKIM page (this tenant uses the newer
+> `a-v1.dkim.mail.microsoft` key-hosting format, NOT the legacy `onmicrosoft.com`
+> pattern). Note Microsoft's spelling "ad**ov**cacy" — copy it exactly.
 
 | Type | Host name (IONOS) | Points to / Value |
 |------|-------------------|-------------------|
-| CNAME | `selector1._domainkey` | `selector1-yorksendadvocacy-co-uk._domainkey.yorksendadovcacy.onmicrosoft.com` |
-| CNAME | `selector2._domainkey` | `selector2-yorksendadvocacy-co-uk._domainkey.yorksendadovcacy.onmicrosoft.com` |
+| CNAME | `selector1._domainkey` | `selector1-yorksendadvocacy-co-uk._domainkey.YorkSENDAdovcacy.a-v1.dkim.mail.microsoft` |
+| CNAME | `selector2._domainkey` | `selector2-yorksendadvocacy-co-uk._domainkey.YorkSENDAdovcacy.a-v1.dkim.mail.microsoft` |
 
 The targets won't resolve until DKIM is switched on in step (b) — that's normal.
+DNS is case-insensitive, so capitalisation in the target does not matter.
 
 ### b) Enable DKIM in the portal
 
