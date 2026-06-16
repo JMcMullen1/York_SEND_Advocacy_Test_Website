@@ -29,18 +29,15 @@ DKIM signs outbound mail and builds sender reputation. Two steps:
 
 ### a) Add the CNAME records at IONOS
 
-> The target uses your tenant's **initial `.onmicrosoft.com` domain**. The exact
-> values are shown in the Microsoft 365 portal in step (b) — copy them from there
-> if they differ from the standard pattern below.
+> Tenant initial domain confirmed: **`yorksendadovcacy.onmicrosoft.com`**
+> (note Microsoft's spelling "ad**ov**cacy" — it must be copied exactly).
 
-| Type | Host / Name | Target |
-|------|-------------|--------|
-| CNAME | `selector1._domainkey` | `selector1-yorksendadvocacy-co-uk._domainkey.<INITIAL>.onmicrosoft.com` |
-| CNAME | `selector2._domainkey` | `selector2-yorksendadvocacy-co-uk._domainkey.<INITIAL>.onmicrosoft.com` |
+| Type | Host name (IONOS) | Points to / Value |
+|------|-------------------|-------------------|
+| CNAME | `selector1._domainkey` | `selector1-yorksendadvocacy-co-uk._domainkey.yorksendadovcacy.onmicrosoft.com` |
+| CNAME | `selector2._domainkey` | `selector2-yorksendadvocacy-co-uk._domainkey.yorksendadovcacy.onmicrosoft.com` |
 
-Replace `<INITIAL>` with your tenant's initial domain (e.g. `yorksendadvocacy`).
-Find it in the Microsoft 365 admin centre under **Settings → Domains** — it's the
-`*.onmicrosoft.com` entry.
+The targets won't resolve until DKIM is switched on in step (b) — that's normal.
 
 ### b) Enable DKIM in the portal
 
