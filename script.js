@@ -7,7 +7,7 @@
 //
 // Until a real key is set, the widget does not render and the forms submit exactly as
 // before (the honeypot still runs). Once set, both forms require a passing challenge.
-var TURNSTILE_SITE_KEY = 'REPLACE_WITH_YOUR_TURNSTILE_SITE_KEY';
+var TURNSTILE_SITE_KEY = '0x4AAAAAAD82f9qB-J2D9h1R';
 
 function turnstileConfigured() {
   return typeof TURNSTILE_SITE_KEY === 'string' &&
