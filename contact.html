@@ -21,6 +21,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
   <link rel="manifest" href="/assets/favicon/site.webmanifest" />
   <meta name="theme-color" content="#1a365d" />
+  <!-- Cloudflare Turnstile (bot protection). Widgets are rendered explicitly from script.js once a site key is configured. -->
+  <script>window.onloadTurnstileCallback = function () { if (window.renderTurnstileWidgets) { window.renderTurnstileWidgets(); } };</script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
 </head>
 <body>
   <a href="#maincontent" class="skip-link">Skip to main content</a>
@@ -80,6 +83,8 @@
                 <label for="message">Your Message</label>
                 <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
               </div>
+              <!-- Cloudflare Turnstile widget renders here (see renderTurnstileWidgets in script.js). -->
+              <div class="cf-turnstile-slot" style="margin-bottom:var(--space-lg);"></div>
               <div>
                 <button type="submit">Send Message</button>
               </div>
