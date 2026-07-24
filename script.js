@@ -1,5 +1,47 @@
+// ===================================================
+// Cloudflare Turnstile bot protection
+// ===================================================
+// Paste the SITE KEY from your Cloudflare Turnstile dashboard between the quotes below.
+// (Dashboard: Cloudflare account > Turnstile > Add site. The site key is public and
+// safe to commit; keep the SECRET key private and out of this repo.)
+//
+// Until a real key is set, the widget does not render and the forms submit exactly as
+// before (the honeypot still runs). Once set, both forms require a passing challenge.
+var TURNSTILE_SITE_KEY = '0x4AAAAAAD82f9qB-J2D9h1R';
+
+function turnstileConfigured() {
+  return typeof TURNSTILE_SITE_KEY === 'string' &&
+    TURNSTILE_SITE_KEY.length > 0 &&
+    TURNSTILE_SITE_KEY.indexOf('REPLACE_WITH') === -1;
+}
+
+function renderTurnstileWidgets() {
+  if (!turnstileConfigured()) {
+    console.warn('[Turnstile] TURNSTILE_SITE_KEY is not set in script.js — bot verification is disabled until you add your site key.');
+    return;
+  }
+  if (!window.turnstile) { return; } // Turnstile API not loaded yet; onload callback will call again.
+  document.querySelectorAll('.cf-turnstile-slot').forEach(function (slot) {
+    if (slot.getAttribute('data-rendered') === 'true') { return; }
+    try {
+      var widgetId = window.turnstile.render(slot, { sitekey: TURNSTILE_SITE_KEY });
+      slot.setAttribute('data-rendered', 'true');
+      slot.setAttribute('data-widget-id', widgetId);
+    } catch (e) {
+      console.error('[Turnstile] Failed to render widget:', e);
+    }
+  });
+}
+
+// Exposed so the Turnstile onload callback in each page's <head> can trigger rendering.
+window.renderTurnstileWidgets = renderTurnstileWidgets;
+window.turnstileConfigured = turnstileConfigured;
+
 // Wait for the DOM to load before running scripts
 document.addEventListener('DOMContentLoaded', function () {
+
+  // Render Turnstile now in case its script finished loading before this ran.
+  renderTurnstileWidgets();
 
   // ===================================================
   // Mobile Menu Toggle
@@ -79,10 +121,23 @@ document.addEventListener('DOMContentLoaded', function () {
       var successMsg = form.querySelector('.success-message');
       var errorMsg = form.querySelector('.error-message');
       var originalBtnText = submitBtn ? submitBtn.textContent : '';
+      var originalErrorText = errorMsg ? errorMsg.textContent : '';
 
       // Hide any previous messages
       if (successMsg) successMsg.classList.remove('show');
       if (errorMsg) errorMsg.classList.remove('show');
+
+      // Require a passing Cloudflare Turnstile challenge before submitting (when configured).
+      if (window.turnstileConfigured && window.turnstileConfigured()) {
+        var tokenField = form.querySelector('[name="cf-turnstile-response"]');
+        if (!tokenField || !tokenField.value) {
+          if (errorMsg) {
+            errorMsg.textContent = 'Please complete the verification below before submitting.';
+            errorMsg.classList.add('show');
+          }
+          return;
+        }
+      }
 
       // Disable button and show sending state
       if (submitBtn) {
@@ -109,6 +164,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 8000);
           }
           form.reset();
+          // Reset the Turnstile challenge so a fresh token is required next time.
+          var slot = form.querySelector('.cf-turnstile-slot');
+          if (window.turnstile && slot && slot.getAttribute('data-widget-id')) {
+            try { window.turnstile.reset(slot.getAttribute('data-widget-id')); } catch (e) {}
+          }
           if (successMsg) {
             successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
@@ -119,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function () {
         // Show error message
         if (errorMsg) {
+          errorMsg.textContent = originalErrorText;
           errorMsg.classList.add('show');
           setTimeout(function () {
             errorMsg.classList.remove('show');
